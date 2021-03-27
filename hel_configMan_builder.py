@@ -1,4 +1,52 @@
-config = {
+class DepthConfigManager_owned:
+    labels = ""
+    NN_config['NN_config']['output_format']='raw'
+    custom_fw_commit = ''
+    # Create arg dict - may be overritten afterwards
+    args['config_overwrite']                =  None
+    args['board']                           =  None
+    args['shaves']                          =  None
+    args['cmx_slices']                      =  None
+    args['NN_engines']                      =  None
+    args['model_compilation_target']        =  'auto'
+    args['rgb_resolution']                  =  1080
+    args['rgb_fps']                         =  30.0
+    args['color_scale']                     =  1.0
+    args['mono_resolution']                 =  400
+    args['mono_fps']                        =  30.0
+    args['disparity_confidence_threshold']  =  200
+    args['stereo_median_size']              =  7
+    args['stereo_lr_check']                 =  False
+    args['store_eeprom']                    =  False
+    args['clear_eeprom']                    =  False
+    args['override_eeprom']                 =  False
+    args['device_id']                       =  ''
+    args['dev_debug']                       =  None
+    args['force_usb2']                      =  None
+    args['cnn_model']                       =  'human-pose-estimation-0001'
+    args['cnn_model2']                      =  ''
+    args['cnn_camera']                      =  'rgb'
+    args['disable_depth']                   =  False
+    args['dra_bb_depth']                    =  False
+    args['full_fov_nn']                     =  False
+    args['sync_video_meta']                 =  False
+    args['sync_sequence_numbers']           =  False
+    args['usb_chunk_KiB']                   =  64
+    args['firmware']                        =  None
+    args['verbose']                         =  False
+    args['streams']                         =  ['metaout','previewout']
+    args['video']                           =  None
+    args['pointcloud']                      =  False
+    args['use_mesh']                        =  False
+    args['mirror_rectified']                =  'true'
+    args['field_of_view']                   =  71.86
+    args['rgb_field_of_view']               =  68.7938
+    args['baseline']                        =  7.5
+    args['rgb_baseline']                    =  3.75
+    args['swap_lr']                         =  True    
+
+
+    config = {
             # Possible streams:
             # ['left', 'right', 'jpegout', 'video', 'previewout', 'metaout', 'depth_sipp', 'disparity', 'depth_color_h']
             # If "left" is used, it must be in the first position.
@@ -89,3 +137,40 @@ config = {
             #    'quality': 95
             #}
         }
+########## to be tested ##########
+    # jsonConfig = postProcessJsonConfig(config)
+
+
+    # def postProcessJsonConfig(self, config):
+    #     # merge board config, if exists
+    #     if self.args['board']:
+    #         board_path = Path(self.args['board'])
+    #         if not board_path.exists():
+    #             board_path = Path(consts.resource_paths.boards_dir_path) / Path(self.args['board'].upper()).with_suffix('.json')
+    #             if not board_path.exists():
+    #                 print('ERROR: Board config not found: {}'.format(board_path))
+    #                 os._exit(2)
+    #         with open(board_path) as fp:
+    #             board_config = json.load(fp)
+    #         utils.merge(board_config, config)
+    #     # handle config overwrite option.
+    #     if self.args['config_overwrite']:
+    #         self.args['config_overwrite'] = json.loads(self.args['config_overwrite'])
+    #         config = utils.merge(self.args['config_overwrite'],config)
+    #         print("Merged Pipeline config with overwrite",config)
+    #     # Append video stream if video recording was requested and stream is not already specified
+    #     self.video_file = None
+    #     if self.args['video'] is not None:
+            
+    #         # open video file
+    #         try:
+    #             self.video_file = open(self.args['video'], 'wb')
+    #             if config['streams'].count('video') == 0:
+    #                 config['streams'].append('video')
+    #         except IOError:
+    #             print("Error: couldn't open video file for writing. Disabled video output stream")
+    #             if config['streams'].count('video') == 1:
+    #                 config['streams'].remove('video')
+    #     return config
+
+
